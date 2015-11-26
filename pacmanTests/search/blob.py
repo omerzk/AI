@@ -1,0 +1,2 @@
+test = "דדגשגשד"
+print(test)
