@@ -1,0 +1,27 @@
+Propositions:
+0a 0b 0c
+Actions:
+Name: M0ab
+pre: 
+add: 0b
+delete: 0a
+Name: M0ac
+pre: 
+add: 0c
+delete: 0a
+Name: M0ba
+pre: 
+add: 0a
+delete: 0b
+Name: M0bc
+pre: 
+add: 0c
+delete: 0b
+Name: M0ca
+pre: 
+add: 0a
+delete: 0c
+Name: M0cb
+pre: 
+add: 0b
+delete: 0c

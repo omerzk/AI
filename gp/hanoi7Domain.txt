@@ -1,0 +1,171 @@
+Propositions:
+0a 0b 0c 1a 1b 1c 2a 2b 2c 3a 3b 3c 4a 4b 4c 5a 5b 5c 6a 6b 6c 
+Actions:
+Name: M0ab
+pre: 0a 
+add: 0b
+delete: 0a
+Name: M0ac
+pre: 0a 
+add: 0c
+delete: 0a
+Name: M0ba
+pre: 0b 
+add: 0a
+delete: 0b
+Name: M0bc
+pre: 0b 
+add: 0c
+delete: 0b
+Name: M0ca
+pre: 0c 
+add: 0a
+delete: 0c
+Name: M0cb
+pre: 0c 
+add: 0b
+delete: 0c
+Name: M1ab
+pre: 1a 0c 
+add: 1b
+delete: 1a
+Name: M1ac
+pre: 1a 0b 
+add: 1c
+delete: 1a
+Name: M1ba
+pre: 1b 0c 
+add: 1a
+delete: 1b
+Name: M1bc
+pre: 1b 0a 
+add: 1c
+delete: 1b
+Name: M1ca
+pre: 1c 0b 
+add: 1a
+delete: 1c
+Name: M1cb
+pre: 1c 0a 
+add: 1b
+delete: 1c
+Name: M2ab
+pre: 2a 0c 1c 
+add: 2b
+delete: 2a
+Name: M2ac
+pre: 2a 0b 1b 
+add: 2c
+delete: 2a
+Name: M2ba
+pre: 2b 0c 1c 
+add: 2a
+delete: 2b
+Name: M2bc
+pre: 2b 0a 1a 
+add: 2c
+delete: 2b
+Name: M2ca
+pre: 2c 0b 1b 
+add: 2a
+delete: 2c
+Name: M2cb
+pre: 2c 0a 1a 
+add: 2b
+delete: 2c
+Name: M3ab
+pre: 3a 0c 1c 2c 
+add: 3b
+delete: 3a
+Name: M3ac
+pre: 3a 0b 1b 2b 
+add: 3c
+delete: 3a
+Name: M3ba
+pre: 3b 0c 1c 2c 
+add: 3a
+delete: 3b
+Name: M3bc
+pre: 3b 0a 1a 2a 
+add: 3c
+delete: 3b
+Name: M3ca
+pre: 3c 0b 1b 2b 
+add: 3a
+delete: 3c
+Name: M3cb
+pre: 3c 0a 1a 2a 
+add: 3b
+delete: 3c
+Name: M4ab
+pre: 4a 0c 1c 2c 3c 
+add: 4b
+delete: 4a
+Name: M4ac
+pre: 4a 0b 1b 2b 3b 
+add: 4c
+delete: 4a
+Name: M4ba
+pre: 4b 0c 1c 2c 3c 
+add: 4a
+delete: 4b
+Name: M4bc
+pre: 4b 0a 1a 2a 3a 
+add: 4c
+delete: 4b
+Name: M4ca
+pre: 4c 0b 1b 2b 3b 
+add: 4a
+delete: 4c
+Name: M4cb
+pre: 4c 0a 1a 2a 3a 
+add: 4b
+delete: 4c
+Name: M5ab
+pre: 5a 0c 1c 2c 3c 4c 
+add: 5b
+delete: 5a
+Name: M5ac
+pre: 5a 0b 1b 2b 3b 4b 
+add: 5c
+delete: 5a
+Name: M5ba
+pre: 5b 0c 1c 2c 3c 4c 
+add: 5a
+delete: 5b
+Name: M5bc
+pre: 5b 0a 1a 2a 3a 4a 
+add: 5c
+delete: 5b
+Name: M5ca
+pre: 5c 0b 1b 2b 3b 4b 
+add: 5a
+delete: 5c
+Name: M5cb
+pre: 5c 0a 1a 2a 3a 4a 
+add: 5b
+delete: 5c
+Name: M6ab
+pre: 6a 0c 1c 2c 3c 4c 5c 
+add: 6b
+delete: 6a
+Name: M6ac
+pre: 6a 0b 1b 2b 3b 4b 5b 
+add: 6c
+delete: 6a
+Name: M6ba
+pre: 6b 0c 1c 2c 3c 4c 5c 
+add: 6a
+delete: 6b
+Name: M6bc
+pre: 6b 0a 1a 2a 3a 4a 5a 
+add: 6c
+delete: 6b
+Name: M6ca
+pre: 6c 0b 1b 2b 3b 4b 5b 
+add: 6a
+delete: 6c
+Name: M6cb
+pre: 6c 0a 1a 2a 3a 4a 5a 
+add: 6b
+delete: 6c

@@ -63,7 +63,7 @@ class PlanGraphLevel(object):
         add = True
         for prop1 in pre:
           for prop2 in pre:
-            if previousPropositionLayer.isMutex(prop1, prop2):
+            if prop1 != prop2 and previousPropositionLayer.isMutex(prop1, prop2):
               add = False
               break
           if not add:
@@ -161,7 +161,10 @@ class PlanGraphLevel(object):
     You don't have to use this function
     """
     previousLayerProposition = previousLayer.getPropositionLayer()
-    "*** YOUR CODE HERE ***"
+    self.updateActionLayer(previousLayerProposition)
+    self.updatePropositionLayer()
+    
+
 		
 def mutexActions(a1, a2, mutexProps):
   """

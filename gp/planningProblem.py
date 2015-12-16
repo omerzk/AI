@@ -19,22 +19,22 @@ class PlanningProblem():
     Constructor
     """
     p = Parser(domain, problem)
-    self.actions, self.propositions = p.parseActionsAndPropositions()	  # list of all the actions and list of all the propositions                                            
-    self.initialState, self.goal = p.pasreProblem() 				            # the initial state and the goal state are lists of propositions                                            
-    self.createNoOps() 											                            # creates noOps that are used to propagate existing propositions from one layer to the next
+    self.actions, self.propositions = p.parseActionsAndPropositions()     # list of all the actions and list of all the propositions                                            
+    self.initialState, self.goal = p.pasreProblem()                             # the initial state and the goal state are lists of propositions                                            
+    self.createNoOps()                                                                       # creates noOps that are used to propagate existing propositions from one layer to the next
     PlanGraphLevel.setActions(self.actions)
     PlanGraphLevel.setProps(self.propositions)
     self._expanded = 0
    
     
   def getStartState(self):
-    "*** YOUR CODE HERE ***"
+    return self.initialState
     
   def isGoalState(self, state):
     """
     Hint: you might want to take a look at goalStateNotInPropLayer function
     """
-    "*** YOUR CODE HERE ***"
+    return not self.goalStateNotInPropLayer(state)
     
   def getSuccessors(self, state):
     """   
@@ -48,7 +48,15 @@ class PlanningProblem():
     a.allPrecondsInList(l) returns true if the preconditions of a are in l
     """
     self._expanded += 1
-    "*** YOUR CODE HERE ***"
+    successors = []
+    for action in self.actions:
+      if not action.isNoOp() and action.allPrecondsInList(state):
+        successor = [prop for prop in state if prop not in action.getDelete()]
+        successor += action.getAdd()
+
+        successors.append((successor, action, 1))
+
+    return successors
 
   def getCostOfActions(self, actions):
     return len(actions)
@@ -89,13 +97,60 @@ def maxLevel(state, problem):
   pgInit.setPropositionLayer(propLayerInit)   #update the new plan graph level with the the proposition layer
   """
   "*** YOUR CODE HERE ***"
+  propLayerInit = PropositionLayer()          #create a new proposition layer
+  for prop in state:
+    propLayerInit.addProposition(prop)        #update the proposition layer with the propositions of the state
+  pgInit = PlanGraphLevel()                   #create a new plan graph level (level is the action layer and the propositions layer)
+  pgInit.setPropositionLayer(propLayerInit)   #update the new plan graph level with the the proposition layer
+
+  level = 0;
+
+  while not problem.isGoalState(pgInit.getPropositionLayer().getPropositions()):
+    level += 1
+    ## Expand to the next leyer
+    prevLayerSize = len(pgInit.getPropositionLayer().getPropositions())
+    pgInit.expandWithoutMutex(pgInit)
+    ## Check if the expanded leyer is the same leyer as before
+    if len(pgInit.getPropositionLayer().getPropositions()) == prevLayerSize:
+      return float("inf")
+    
+  return level
+
   
 def levelSum(state, problem):
   """
   The heuristic value is the sum of sub-goals level they first appeared.
   If the goal is not reachable from the state your heuristic should return float('inf')
   """
-  "*** YOUR CODE HERE ***"
+  propLayerInit = PropositionLayer()          #create a new proposition layer
+  for prop in state:
+    propLayerInit.addProposition(prop)        #update the proposition layer with the propositions of the state
+  pgInit = PlanGraphLevel()                   #create a new plan graph level (level is the action layer and the propositions layer)
+  pgInit.setPropositionLayer(propLayerInit)   #update the new plan graph level with the the proposition layer
+
+  level = 0
+  sumLevel = 0
+  currentGoals = set(copy.copy(problem.goal))
+
+  while currentGoals: #TODO: Changed: run until all goals found/no solution possible 
+    #check for new goals achieved
+    goalsInHand = set(pgInit.getPropositionLayer().getPropositions()) & currentGoals
+
+    if goalsInHand:
+      sumLevel +=  len(goalsInHand) * level;
+      currentGoals -= goalsInHand;
+
+    level += 1
+
+    ## Expand to the next leyer
+    prevLayerSize = len(pgInit.getPropositionLayer().getPropositions())
+    pgInit.expandWithoutMutex(pgInit)
+    ## Check if the expanded leyer is the same leyer as before
+    if len(pgInit.getPropositionLayer().getPropositions()) == prevLayerSize:
+      return float("inf")
+    
+  return sumLevel
+
   
 def isFixed(Graph, level):
   """
@@ -130,7 +185,8 @@ if __name__ == '__main__':
 
   prob = PlanningProblem(domain, problem)
   start = time.clock()
-  plan = aStarSearch(prob, heuristic)  
+  plan = aStarSearch(prob, heuristic)
+  print([a.getName() for a in plan])  
   elapsed = time.clock() - start
   if plan is not None:
     print("Plan found with %d actions in %.2f seconds" % (len(plan), elapsed))
@@ -138,3 +194,5 @@ if __name__ == '__main__':
     print("Could not find a plan in %.2f seconds" %  elapsed)
   print("Search nodes expanded: %d" % prob._expanded)
  
+
+  

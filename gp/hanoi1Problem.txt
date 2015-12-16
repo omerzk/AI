@@ -1,0 +1,2 @@
+Initial state: 0a
+Goal state: 0c

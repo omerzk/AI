@@ -1,0 +1,2 @@
+Initial state: 7a 6a 5a 4a 3a 2a 1a 0a
+Goal state: 7c 6c 5c 4c 3c 2c 1c 0c
