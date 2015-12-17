@@ -52,7 +52,7 @@ class PlanningProblem():
     for action in self.actions:
       if not action.isNoOp() and action.allPrecondsInList(state):
         successor = [prop for prop in state if prop not in action.getDelete()]
-        successor += action.getAdd()
+        successor += [prop for prop in action.getAdd() if prop not in successor]
 
         successors.append((successor, action, 1))
 
